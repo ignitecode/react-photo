@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './Videos.css';
+import './Favorites.css';
 import withContainer from "../../components/withContainer/withContainer";
 
-class Videos extends Component {
+class Favorites extends Component {
     render() {
-        return <h1>Videos</h1>
+        return <h1>Favorite Photos</h1>
     }
   }
 
-export default withContainer(Videos);
+export default withContainer(Favorites);

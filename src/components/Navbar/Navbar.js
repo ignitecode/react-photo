@@ -28,17 +28,13 @@ export default class Navbar extends Component {
             <Menu.Item>
               <Image alt="logo" height="30" width="30" src={Logo} />
             </Menu.Item>
-            <Menu.Item
-                name='Videos'
-                active
-            >
+            <Menu.Item name="home" active>
               Home
             </Menu.Item>
-
-            <Menu.Item name="Favorites">
+            <Menu.Item name="favorites">
               Favorites
             </Menu.Item>
-            <Menu.Item name='Search'>
+            <Menu.Item name="search">
                 <Search
                     loading={false}
                     onResultSelect={(item) => this.handleResultSelect(item)}
