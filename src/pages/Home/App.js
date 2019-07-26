@@ -32,7 +32,7 @@ class App extends Component {
             this.state.images.map(item => {
               return (
                   <Card >
-                    <Image size="medium" src={item.urls.regular} wrapped ui={false} />
+                    <Image size="medium" width="200" height="300" src={item.urls.full} wrapped ui={false} />
                     <Card.Content>
                       <Card.Header>{item.title}</Card.Header>
                       <Card.Meta>
