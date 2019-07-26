@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Image, Icon } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 import withContainer from '../../components/withContainer/withContainer';
 import { API_URL } from "../../constants";
 import './App.css';
@@ -29,9 +29,9 @@ class App extends Component {
           <h1>Home</h1>
           <Card.Group itemsPerRow={3}>
           {
-            this.state.images.map(item => {
+            this.state.images.map((item, i) => {
               return (
-                  <Card >
+                  <Card key={i} >
                     <Image size="medium" width="200" height="300" src={item.urls.full} wrapped ui={false} />
                     <Card.Content>
                       <Card.Header>{item.title}</Card.Header>
