@@ -35,17 +35,21 @@ export default class App extends Component {
      * Adds a users favorite to an array of favorite images
      * @param image
      */
-    addFavorite(image) {
+    addLike(image) {
         const { favorites } = this.state;
         this.setState({ favorites: [...favorites, image] });
+    }
+
+    onDislike(image) {
+        console.log('Disliking...', image);
     }
 
     render() {
         return (
             <Router>
                 <Switch>
-                    <Route exact path="/" render={() => <Home onFavorite={(image) => this.addFavorite(image)} images={this.state.images} favorites={this.state.favorites} />} />
-                    <Route path="/favorites" render={() => <Favorites />} />
+                    <Route exact path="/" render={() => <Home onLike={(image) => this.addLike(image)} images={this.state.images} />} />
+                    <Route path="/favorites" render={() => <Favorites onDislike={(item) => this.onDislike(item)} favorites={this.state.favorites} />} />
                 </Switch>
             </Router>
         )
