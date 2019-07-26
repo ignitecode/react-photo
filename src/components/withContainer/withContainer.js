@@ -5,18 +5,17 @@ import { Container } from "semantic-ui-react";
 
 
 /**
- * HOC wrapping a base component with a provided container, sidebar, and navbar
+ * HOC wrapping a base component with a provided container and navbar
  * @param BaseComponent
- * @param navbarProps
  */
-const withContainer = (BaseComponent, navbarProps) => {
+const withContainer = (BaseComponent) => {
   return class Enhanced extends Component {
     render() {
         return (
             <Container fluid>
-              <Navbar {...navbarProps} />
+              <Navbar />
               <div className="p-4">
-                <BaseComponent/>
+                <BaseComponent {...this.props} />
               </div>
             </Container>
         )
