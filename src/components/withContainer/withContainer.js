@@ -13,7 +13,7 @@ const withContainer = (BaseComponent) => {
     render() {
         return (
             <Container fluid>
-              <Navbar />
+              <Navbar onSearch={() => this.props.onSearch()} onInputChange={(value) => this.props.onInputChange(value)} />
               <div className="p-4">
                 <BaseComponent {...this.props} />
               </div>

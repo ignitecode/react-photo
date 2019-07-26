@@ -11,6 +11,7 @@ export default class App extends Component {
         this.state = {
             favorites: [],
             images: [],
+            searchValue: '',
         };
     }
 
@@ -44,12 +45,39 @@ export default class App extends Component {
         console.log('Disliking...', image);
     }
 
+    onSearch() {
+        fetch(`${API_URL}?query=${this.state.searchValue}&per_page=9`, {
+            headers: {
+                Authorization: `Client-ID 51d4e3876e7e846aefdc9c0db737f7ab3dc5034b59fda2cbd5d07e2deeac1e3b`
+            }
+        })
+        .then(res => res.json())
+        .then(res => {
+            this.setState({ images: res.results });
+            console.log(res.results);
+        })
+    }
+
     render() {
         return (
             <Router>
                 <Switch>
-                    <Route exact path="/" render={() => <Home onLike={(image) => this.addLike(image)} images={this.state.images} />} />
-                    <Route path="/favorites" render={() => <Favorites onDislike={(item) => this.onDislike(item)} favorites={this.state.favorites} />} />
+                    <Route exact path="/" render={() =>
+                        <Home
+                            onLike={(image) => this.addLike(image)}
+                            images={this.state.images}
+                            onSearch={() => this.onSearch()}
+                            onInputChange={(value) => this.setState({ searchValue: value })}
+                        />}
+                    />
+                    <Route path="/favorites" render={() =>
+                        <Favorites
+                            onDislike={(item) => this.onDislike(item)}
+                            favorites={this.state.favorites}
+                            onSearch={() => this.onSearch()}
+                            onInputChange={(value) => this.setState({ searchValue: value })}
+                        />}
+                    />
                 </Switch>
             </Router>
         )

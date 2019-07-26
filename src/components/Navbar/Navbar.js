@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Menu, Image, Search } from 'semantic-ui-react';
+import { Menu, Image, Input, Button } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-import debounce from 'lodash/debounce';
 import Logo from '../../resources/images/logo.png';
 import './Navbar.css';
 
@@ -11,17 +10,9 @@ class Navbar extends Component {
 
         this.state = {
             results: [],
-            value: '',
-        }
+            isLoading: false,
+        };
     }
-
-    handleSearchChange() {
-
-  }
-
-  handleResultSelect() {
-
-  }
 
   render() {
       return (
@@ -36,13 +27,10 @@ class Navbar extends Component {
               Favorites
             </Menu.Item>
             <Menu.Item name="search">
-                <Search
-                    loading={false}
-                    onResultSelect={(item) => this.handleResultSelect(item)}
-                    onSearchChange={debounce(this.handleSearchChange, 500, { leading: true })}
-                    results={this.state.results}
-                    value={this.state.value}
-                />
+                <Input type="text" action  placeholder='Search'>
+                    <input onChange={({ target }) => this.props.onInputChange(target.value)} />
+                    <Button type="button" onClick={() => this.props.onSearch()}>Search</Button>
+                </Input>
             </Menu.Item>
           </Menu>
       )
