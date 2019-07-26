@@ -19,3 +19,7 @@ code {
 .ui.segment {
   border: 0;
 }
+
+.ui.menu {
+  border-radius: 0;
+}

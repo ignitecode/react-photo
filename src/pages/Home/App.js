@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import isNil from 'lodash/isNil';
 import { Card, Image } from 'semantic-ui-react';
 import withContainer from '../../components/withContainer/withContainer';
 import { API_URL } from "../../constants";
@@ -14,35 +15,43 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`${API_URL}?query=ocean`, {
+    fetch(`${API_URL}?query=ocean&per_page=9`, {
       headers: {
         Authorization: `Client-ID 51d4e3876e7e846aefdc9c0db737f7ab3dc5034b59fda2cbd5d07e2deeac1e3b`
       }
     })
       .then(res => res.json())
-      .then(res => this.setState({ images: res.results }))
+      .then(res => {
+        this.setState({ images: res.results });
+        console.log(res.results);
+      })
   }
 
   render() {
     return (
         <div>
-          <h1>Home</h1>
           <Card.Group itemsPerRow={3}>
           {
             this.state.images.map((item, i) => {
               return (
                   <Card key={i} >
-                    <Image size="medium" width="200" height="300" src={item.urls.full} wrapped ui={false} />
+                    <Image size="medium"  src={`${item.urls.full}&w=350&h=350&fit=crop`} wrapped ui={false} />
                     <Card.Content>
-                      <Card.Header>{item.title}</Card.Header>
+                      <Image floated="right" size="large" avatar src={item.user.profile_image.large} />
+                      <Card.Header>
+                        { isNil(item.description) || item.description.length > 40 ? 'Untitled' : item.description }
+                      </Card.Header>
                       <Card.Meta>
                         <span className='date'>
-                          { item.created_at}
+                          { item.user.name }
                         </span>
                       </Card.Meta>
                       <Card.Description>
-                        { item.description + '' + item.alt_description }
+                        { item.alt_description }
                       </Card.Description>
+                      {
+                        item.tags.map(({ title }) => <span className="badge badge-pill badge-primary mr-2">{ title }</span>)
+                      }
                     </Card.Content>
                   </Card>
               )

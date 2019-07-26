@@ -15,7 +15,9 @@ const withContainer = (BaseComponent, navbarProps) => {
         return (
             <Container fluid>
               <Navbar {...navbarProps} />
-              <BaseComponent/>
+              <div className="p-4">
+                <BaseComponent/>
+              </div>
             </Container>
         )
     }
