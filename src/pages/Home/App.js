@@ -50,7 +50,7 @@ class App extends Component {
                         { item.alt_description }
                       </Card.Description>
                       {
-                        item.tags.map(({ title }) => <span className="badge badge-pill badge-primary mr-2">{ title }</span>)
+                        item.tags.map(({ title }) => <span className="badge badge-pill badge-primary mr-2" style={{ backgroundColor: 'rgb(236, 62, 82)' }}>{ title }</span>)
                       }
                     </Card.Content>
                   </Card>
