@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Menu, Image, Search } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
 import debounce from 'lodash/debounce';
 import Logo from '../../resources/images/logo.png';
 import './Navbar.css';
 
-export default class Navbar extends Component {
+class Navbar extends Component {
     constructor(props) {
         super(props);
 
@@ -14,7 +15,7 @@ export default class Navbar extends Component {
         }
     }
 
-  handleSearchChange() {
+    handleSearchChange() {
 
   }
 
@@ -28,10 +29,10 @@ export default class Navbar extends Component {
             <Menu.Item>
               <Image alt="logo" height="30" width="30" src={Logo} />
             </Menu.Item>
-            <Menu.Item name="home" active>
+            <Menu.Item name="home" onClick={() => this.props.history.push('/')} active={this.props.location.pathname === '/'}>
               Home
             </Menu.Item>
-            <Menu.Item name="favorites">
+            <Menu.Item name="favorites" onClick={() => this.props.history.push('/favorites')} active={this.props.location.pathname === '/favorites'}>
               Favorites
             </Menu.Item>
             <Menu.Item name="search">
@@ -47,3 +48,5 @@ export default class Navbar extends Component {
       )
   }
 }
+
+export default withRouter(Navbar);
